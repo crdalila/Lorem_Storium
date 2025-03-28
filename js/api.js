@@ -1,4 +1,4 @@
-// FETCH IMÁGENES
+// FETCH IMÁGENES: picsum
 async function fetchImages() {
     const BASE_URL_IMG = "https://picsum.photos/v2/list?";
 
@@ -19,10 +19,28 @@ async function fetchImages() {
     }    
 }
 
-// FETCH PERSONAJE
+// FETCH PERSONAJE: randomuser.me
+async function fetchCharacter() {
+    const BASE_URL_CHARACTER = "https://randomuser.me/api/";
 
+    try {
+        const finalURL = new URL (BASE_URL_CHARACTER);
+
+        /* finalURL.searchParams.append("exc", "gender, email, registered, phone, cell, picture"); */
+
+        const response = await fetch(finalURL.toString());
+        const data = await response.json();
+
+        return data.results;
+    }
+    catch(error) {
+        console.error("Error fetching character data", error);
+    }
+}
 
 // FETCH PROMPT
 
 
-export { fetchImages }
+export { fetchImages,
+    fetchCharacter,
+ }

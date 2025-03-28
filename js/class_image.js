@@ -40,7 +40,7 @@ class ImageHTML extends Image {
         const index = document.getElementById("index");
         // sección imagen + botón
         const imageSection = document.createElement("section");
-        imageSection.classList.add("section__image");
+        imageSection.classList.add("index__image");
         imageSection.innerHTML = "";
 
         // imagen
@@ -77,8 +77,8 @@ class ImageHTML extends Image {
     }
     // RENDERIZAR IMAGEN
     render() {
-        if (this.imageElement) {
-            this.imageElement.src = this.imageLink;
+        if (this.imageElement) { //comprueba si lo has creado en createHTML
+            this.imageElement.src = this.imageLink; //el src te lo cambia a una nueva imagen
         }
     }
 }

@@ -1,0 +1,99 @@
+import { fetchCharacter } from "./api.js";
+
+class Character {
+    constructor(data = {}) { //desestructuración, por si no nos da alguno de los datos, generamos '' por defecto
+        const {
+            id = '',
+            name = { first: '', last: '' },
+            location = { city: '', country: '' },
+            dob = { age: '' },
+        } = data;
+
+        this.id = id;
+        this.name = name.first;
+        this.surname = name.last;
+        this.location = location.city;
+        this.country = location.country;
+        this.dob = dob.age;
+
+        this.fav = false;
+    }
+}
+
+class CharacterHTML {
+    constructor() {
+        this.randomButton = null;
+        this.characterSection = null; //lo necesitamos aquí y no como variable dentro de createHTML porque lo vamos a necesitar fuera también
+        this.characterName = null;
+        this.characterLocation = null;
+        this.characterDob = null;
+        this.character = null; // el personaje está vacío al principio
+    }
+
+    // INICIALIZAR
+    initialize() {
+        this.createHTML();
+        this.setupEventListeners();
+    }
+
+    // CREAR HTML
+    createHTML() {
+        const index = document.getElementById("index");
+        
+        // sección datos + botón
+        this.characterSection = document.createElement("section");
+        this.characterSection.classList.add("index__character");
+        
+        // datos
+        const characterData = document.createElement("section");
+        characterData.classList.add("index__character-data");
+
+        this.characterName = document.createElement("h1");
+        this.characterLocation = document.createElement("p");
+        this.characterDob = document.createElement("p");
+        
+        //botón
+        this.randomButton = document.createElement("button");
+        this.randomButton.textContent = "Random";
+        
+        //appends
+        characterData.append(this.characterName, this.characterDob, this.characterLocation);
+        this.characterSection.append(characterData, this.randomButton);
+        index.append(this.characterSection);
+    }
+
+    // EVENT LISTENERS
+    setupEventListeners() {
+        this.loadRandomCharacter(); //nos carga un personaje nuevo
+
+        if (this.randomButton) { //si el botón está bien creado
+            this.randomButton.addEventListener("click", () => this.loadRandomCharacter());
+        }
+    }
+
+    // CARGAR PERSONAJE ALEATORIO
+    async loadRandomCharacter() {
+        try {
+            const characterArray = await fetchCharacter(); //por cómo nos da los datos la API, todos los datos están en el [0]
+            if (characterArray && characterArray.length > 0) { //si el array de datos existe (mayor que 0 elementos)
+                this.character = new Character(characterArray[0]); //el personaje se crea con una instancia de Character y lo almacena en character que estaba vacío
+                this.render();
+            }
+        } catch (error) {
+            console.error("Error al cargar los datos del personaje", error);
+        }
+    }
+
+    // RENDERIZAR DATOS EN EL HTML
+    render() {
+        if (!this.character) { //por si no personaje cargado
+            return;
+        }
+        //actualiza el HTML
+        this.characterName.textContent = `Nombre: ${this.character.name} ${this.character.surname}`;
+        this.characterDob.textContent = `Edad: ${this.character.dob}`;
+        this.characterLocation.textContent = `Localización: ${this.character.location}, ${this.character.country}`;
+    }
+}
+
+export { CharacterHTML };
