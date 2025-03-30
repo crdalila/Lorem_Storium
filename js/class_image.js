@@ -38,9 +38,10 @@ class ImageHTML extends Image {
     // CREAR HTML IMAGEN
     createHTML() {
         const index = document.getElementById("index");
+        const index__options = document.getElementById("index__options");
         // sección imagen + botón
         const imageSection = document.createElement("section");
-        imageSection.classList.add("index__image");
+        imageSection.classList.add("index__options-image");
         imageSection.innerHTML = "";
 
         // imagen
@@ -53,7 +54,8 @@ class ImageHTML extends Image {
 
         // appends
         imageSection.append(this.imageElement, this.randomButton);
-        index.append(imageSection);
+        index__options.append(imageSection);
+        index.append(index__options);
     }
     // EVENT LISTENERS
     setupEventListeners() {

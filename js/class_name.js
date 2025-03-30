@@ -20,8 +20,9 @@ class Character {
     }
 }
 
-class CharacterHTML {
-    constructor() {
+class CharacterHTML extends Character {
+    constructor(id, name, surname, location, country, dob) {
+        super (id, name, surname, location, country, dob);
         this.randomButton = null;
         this.characterSection = null; //lo necesitamos aquí y no como variable dentro de createHTML porque lo vamos a necesitar fuera también
         this.characterName = null;
@@ -39,7 +40,7 @@ class CharacterHTML {
     // CREAR HTML
     createHTML() {
         const index = document.getElementById("index");
-        
+        const index__options = document.getElementById("index__options");
         // sección datos + botón
         this.characterSection = document.createElement("section");
         this.characterSection.classList.add("index__character");
@@ -59,7 +60,8 @@ class CharacterHTML {
         //appends
         characterData.append(this.characterName, this.characterDob, this.characterLocation);
         this.characterSection.append(characterData, this.randomButton);
-        index.append(this.characterSection);
+        index__options.appendChild(this.characterSection);
+        index.appendChild(index__options);
     }
 
     // EVENT LISTENERS
