@@ -8,20 +8,6 @@ class Image {
 
         this.fav = false;
     }
-    // GUARDAR FAVORITOS
-    saveFav() {
-        if (this.fav) {
-            return;
-        }
-        this.fav = true;
-    }
-    // BORRAR FAVORITOS
-    removeFav() {
-        if (!this.fav) {
-            return;
-        }
-        this.fav = false;
-    }
 }
 
 class ImageHTML extends Image {
@@ -74,7 +60,7 @@ class ImageHTML extends Image {
                 this.render();
             }
         } catch (error) {
-            console.error("Error al cargar imagen:", error);
+            console.error("❌ Error al cargar imagen:", error);
         }
     }
     // RENDERIZAR IMAGEN

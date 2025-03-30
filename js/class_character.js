@@ -23,12 +23,12 @@ class Character {
 class CharacterHTML extends Character {
     constructor(id, name, surname, location, country, dob) {
         super (id, name, surname, location, country, dob);
+        this.character = null; // el personaje está vacío al principio
         this.randomButton = null;
-        this.characterSection = null; //lo necesitamos aquí y no como variable dentro de createHTML porque lo vamos a necesitar fuera también
-        this.characterName = null;
+        this.characterSection = null; //los necesitamos aquí y no como variable dentro de createHTML porque lo vamos a necesitar fuera también
+        this.characterName = null; //los usamos en render
         this.characterLocation = null;
         this.characterDob = null;
-        this.character = null; // el personaje está vacío al principio
     }
 
     // INICIALIZAR
@@ -82,7 +82,7 @@ class CharacterHTML extends Character {
                 this.render();
             }
         } catch (error) {
-            console.error("Error al cargar los datos del personaje", error);
+            console.error("❌ Error al cargar los datos del personaje", error);
         }
     }
 

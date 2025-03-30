@@ -11,11 +11,10 @@ async function fetchImages() {
 
         const response = await fetch(finalURL.toString());
         const data = await response.json();
-
         return data;
     }
     catch(error) {
-        console.error("Error fetching image", error);
+        console.error("❌ Error fetching image", error);
     }    
 }
 
@@ -25,22 +24,31 @@ async function fetchCharacter() {
 
     try {
         const finalURL = new URL (BASE_URL_CHARACTER);
-
-        /* finalURL.searchParams.append("exc", "gender, email, registered, phone, cell, picture"); */
-
         const response = await fetch(finalURL.toString());
         const data = await response.json();
-
-        return data.results;
+        return data.results; //.results porque es un objeto
     }
     catch(error) {
-        console.error("Error fetching character data", error);
+        console.error("❌ Error fetching character data", error);
     }
 }
 
-// FETCH PROMPT
+// FETCH PROMPT: quotable
+async function fetchPrompt() {
+    const BASE_URL_PROMPT = "https://api.quotable.io/quotes/random/";
 
+    try {
+        const finalURL = new URL (BASE_URL_PROMPT);
+        const response = await fetch(finalURL.toString());
+        const data = await response.json();
+        return data;
+    }
+    catch(error) {
+        console.error("❌ Error fetching prompt", error);
+    }
+}
 
 export { fetchImages,
     fetchCharacter,
+    fetchPrompt,
  }
