@@ -1,141 +1,117 @@
-import { ImageHTML } from "./class_image.js"
-import { CharacterHTML } from "./class_character.js"
-import { getFromLocalStorage } from "./localstorage.js";
+import { ImageHTML } from "./class_image.js";
+import { CharacterHTML } from "./class_character.js";
+import { fetchPrompt } from "./api.js";
+import { IdeaManagerHTML } from "./class_manager.js";
+import { getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
 
-class IdeaManager {
+
+class Fav {
     constructor(id) {
         this.id = id;
         this.fav = false;
     }
     // FUNCIÓN GUARDAR FAVORITOS
-/*     saveFav() {
-        if (this.fav) {
-            return;
-        }
+    saveFav() {
         this.fav = true;
     }
     // FUNCIÓN BORRAR FAVORITOS
     removeFav() {
-        if (!this.fav) {
-            return;
-        }
         this.fav = false;
-    } */
+    }
 }
 
-class IdeaManagerHTML extends IdeaManager {
-    constructor(id, imageInstance, /* characterInstance, */ promptInstance) {
+class FavHTML extends Fav {
+    constructor(id) {
         super(id);
-        this.randomButton = null;
+        this.favCard = null;
+        this.favorites = null;
         this.favButton = null;
-        this.idea = null;
-        this.imageInstance = imageInstance; //para que no nos genere un html nuevo sino que lo coja de la imagen que ya tenemos
-        /* this.characterInstance = characterInstance; */
-        this.promptInstance = promptInstance;
     }
-
-    // FUNCION GUARDAR FAVORITOS
-/*     saveFav() {
-        super.saveFav();
-        this.article.classList.add("favIdea");
-    }
-
-    // FUNCION BORRAR FAVORITOS
-    removeFav() {
-        super.removeFav();
-        this.article.classList.remove("favIdea");
-    } */
 
     // INICIALIZAR
     initialize() {
         this.createHTML();
-        this.setupEventListenerRandom();
-        /* this.setupEventListenerFav(); */ //TODO favs
+        this.updateFavoritesSection();
     }
 
     // CREAR HTML DEL INDEX MANAGER
     createHTML() {
-        const index = document.getElementById("index");
-        const index__manager = document.getElementById("index__manager")
+        this.favorites = document.getElementById("favorites");
+        this.favorites.innerHTML = '';
 
-        //botones
-        this.randomButton = document.createElement("button");
-        this.randomButton.textContent = "Random";
+        const favTitle = document.createElement('h1');
+        favTitle.textContent = "YOUR FAV IDEAS";
+
+        //tarjeta de favoritos
+        const favsLocalStorage = getFromLocalStorage("favorites") || []; //si hay wishlist la carga, si no, array vacío
+
+        this.favCard = document.createElement("section");
+        this.favCard.setAttribute("id", "favorites__card");
 
         this.favButton = document.createElement("button");
         this.favButton.textContent = "Fav";
-
+        /* 
+                const favImage = document.createElement("img"); //img
+        
+                const favCharacterData = document.createElement("section"); //personaje
+                favCharacterData.classList.add("favorites__card-character");
+                const characterName = document.createElement("h1");
+                const characterLocation = document.createElement("p");
+                const characterDob = document.createElement("p");
+        
+                const favPrompt = document.createElement("p"); //prompt
+                favCharacterData.append(characterName, characterLocation, characterDob);
+         */
         //appends
-        index__manager.append(this.randomButton, this.favButton);
-        index.append(index__manager);
+        this.favCard.append(favsLocalStorage);
+        this.favorites.appendChild(favTitle, this.favCard);
+
+        this.updateFavoritesSection();
     }
 
-    // EVENT LISTENERS
-    setupEventListenerRandom() {
-        if (!this.imageInstance /* ||!this.characterInstance */) {
+    updateFavoritesSection() {
+        if (!this.favorites) {
+            console.error("❌ Error: La sección de favoritos no existe en el HTML");
             return;
         }
-        if (this.randomButton) {
-            this.randomButton.addEventListener("click", () => {
-                this.imageInstance.loadRandomImage();
-                /* this.characterInstance.loadRandomCharacter(); */
-                this.promptInstance.loadRandomPrompt();
+        // Limpiar la sección antes de actualizar
+        this.favorites.innerHTML = "";
+
+        // Obtener las ideas favoritas desde localStorage
+        const favIdeas = getFromLocalStorage("favorites") || [];
+
+        favIdeas.forEach(favData => {
+            const favElement = document.createElement("div");
+            favElement.classList.add("favorite-item");
+            favElement.textContent = `Idea: ${this.favCard}`;
+
+            // Botón para quitar de favoritos
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove from favorites"; //TODO icono de corazón lleno/vacío
+            removeButton.addEventListener("click", () => {
+                removeFromLocalStorageArray("favorites", favData);
+                this.updateFavoritesSection(); // Actualizar la UI después de eliminar
             });
-        } else {
-            console.error("❌ Error: RandomButton no existe");
-        }
+
+            favElement.appendChild(removeButton);
+            this.favorites.appendChild(favElement);
+        });
     }
 
-/*     setupEventListenerFav() {
-        if (this.favButton) { //si el botón está bien creado
-            this.favButton.addEventListener("click", () => {
-                const favIdeas = getFromLocalStorage("favorites");
-                const isFavIdea = favIdeas.some( fav => fav.id === this.id); //para ver si ya está entre los favs
-                if (isFavIdea) {
-                    this.removeFav();
-                    removeFromLocalStorageArray("favorites", this);
-                    const localStorageIdeas = getFromLocalStorage("favorites") || [];
-                    displayFavoriteIdeas(localStorageIdeas);
-                } else {
-                    this.saveFav();
-                    addToLocalStorageArray("favorites", this);
-                }
-                this.render();
-            })
+    // EVENT LISTENERS: BOTÓN BORRAR FAVORITOS
+    setupEventListenerFav() {
+        if (!this.favCard) {
+            return;
         }
-    } */
-
-    /*     initializeWishlist(){
-            const wishlistImg = document.createElement("img");
-            wishlistImg.setAttribute("src", "./assets/wishlist-img.jpg");
-            wishlistImg.setAttribute("id", "wishlist-img");
-    
-            const wishlistSection = document.getElementById("wishlist");
-            const tituloWishlist = document.createElement('h1');
-            tituloWishlist.textContent = "WISHLIST";
-            wishlistSection.innerHTML = "";
-            const wishlistLocalStorage = getFromLocalStorage("favorites") || []; //si hay wishlist la carga, si no, array vacío
-            const wishlistLocalStorageDiv = document.createElement("div");
-            wishlistLocalStorageDiv.setAttribute("id", "wishlist__books");
-            wishlistSection.append(wishlistImg, tituloWishlist, wishlistLocalStorageDiv);
-            displayFavoriteIdeas(wishlistLocalStorage);
-            
-        } */
-
-    // RENDERIZAR DATOS EN EL HTML
-    /*     render() {
-            if (!this.character) { //por si no personaje cargado
-                return;
-            }
-        } */
+        if (this.favButton) {
+            this.favButton.addEventListener("click", () => {
+                removeFromLocalStorageArray("favorites", idea);
+                this.updateFavoritesSection(); // Actualizar la UI después de eliminar
+            });
+        } else {
+            console.error("❌ Error: FavButton no existe");
+        }
+    }
 }
 
-/* function displayFavoriteIdeas(ideas) {
-    const favsSection = document.getElementById("favorites");
-    favsSection.innerHTML = ""; //si hemos hecho búsqueda anterior, la borra
-    ideas.forEach(idea => {
-        idea.initialize(favs);
-    })
-}
- */
-export { IdeaManagerHTML };
+export { FavHTML }

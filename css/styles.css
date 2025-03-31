@@ -102,3 +102,11 @@ body {
 img {
     width: 50%;
 }
+
+body {
+    background-color: #343457;
+    
+}
+p, h1, h2{
+    color: white;
+}

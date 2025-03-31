@@ -1,6 +1,6 @@
 import { ImageHTML } from "./class_image.js";
 import { CharacterHTML } from "./class_character.js";
-import { IdeaManagerHTML } from "./class_favs.js"
+import { IdeaManagerHTML } from "./class_manager.js"
 
 // Guardar objetos en LocalStorage
 function saveToLocalStorage (favs, idea) { //donde se guarda, el qué
@@ -15,7 +15,7 @@ function getFromLocalStorage (favs) {
 	const result = [];
 	if(resultJSON !== null) {
 		resultJSON.forEach(idea => { //crear un array de ideas
-			const ideaCard = new ImageHTML (
+			let ideaCard = new ImageHTML (
 				idea.id,
 			)
             ideaCard = new CharacterHTML (

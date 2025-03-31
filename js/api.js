@@ -30,6 +30,7 @@ async function fetchCharacter() {
     }
     catch(error) {
         console.error("❌ Error fetching character data", error);
+        //TODO por si falla la API otra vez, crear un objeto con estos datos y falsear lo que me devuelve la API
     }
 }
 
