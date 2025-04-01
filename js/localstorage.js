@@ -3,25 +3,19 @@ import { CharacterHTML } from "./class_character.js";
 import { IdeaManagerHTML } from "./class_manager.js"
 
 // Guardar objetos en LocalStorage
-function saveToLocalStorage (favs, idea) { //donde se guarda, el qué
-	const stringIdea = JSON.stringify(idea);
+function saveToLocalStorage (favs, idea) { //donde se guarda, el qué TODO idea es un array de ideas
+	const stringIdea = JSON.stringify(idea); //de JSON a string
 	localStorage.setItem(favs, stringIdea);
 }
 
 // Recuperar todos los objetos guardados en el LocalStorage
 function getFromLocalStorage (favs) {
 	const resultString = localStorage.getItem(favs);
-	const resultJSON = JSON.parse(resultString);
-	const result = [];
+	const resultJSON = JSON.parse(resultString); //de string a JSON
+	const result = []
 	if(resultJSON !== null) {
 		resultJSON.forEach(idea => { //crear un array de ideas
-			let ideaCard = new ImageHTML (
-				idea.id,
-			)
-            ideaCard = new CharacterHTML (
-                idea.id,
-            )
-			result.push(ideaCard);
+			result.push(idea);
 		});	
 	}
 	return result;
@@ -30,6 +24,7 @@ function getFromLocalStorage (favs) {
 // Añadir libros al array guardado en LocalStorage
 function addToLocalStorageArray (favs, idea) {
 	const array = getFromLocalStorage(favs) || [];
+	console.log(array, idea);
 	const index = array.findIndex(element => element.id === idea.id);
 	if (index !== -1) {
 		return;

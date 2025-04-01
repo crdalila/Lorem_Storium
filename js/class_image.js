@@ -33,10 +33,11 @@ class ImageHTML extends Image {
         // imagen
         this.imageElement = document.createElement("img");
         this.imageElement.setAttribute("alt", "Imagen random de la página Picsum");
+        this.imageElement.setAttribute("id", "randomImage");
 
         // botón
         this.randomButton = document.createElement("button");
-        this.randomButton.textContent = "Random";
+        this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
 
         // appends
         imageSection.append(this.imageElement, this.randomButton);

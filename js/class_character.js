@@ -43,11 +43,11 @@ class CharacterHTML extends Character {
         const index__options = document.getElementById("index__options");
         // sección datos + botón
         this.characterSection = document.createElement("section");
-        this.characterSection.classList.add("index__character");
+        this.characterSection.classList.add("index__options-character");
         
         // datos
         const characterData = document.createElement("section");
-        characterData.classList.add("index__character-data");
+        characterData.classList.add("index__options-character-data");
 
         this.characterName = document.createElement("h1");
         this.characterLocation = document.createElement("p");
@@ -55,7 +55,7 @@ class CharacterHTML extends Character {
         
         //botón
         this.randomButton = document.createElement("button");
-        this.randomButton.textContent = "Random";
+        this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
         
         //appends
         characterData.append(this.characterName, this.characterDob, this.characterLocation);

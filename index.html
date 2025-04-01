@@ -21,10 +21,9 @@
 
     <header>
         <nav id="menu">
-            <div class="menu__logo">
-                <a href="index.html">
-                    <p id="logo-header">LOREM STORIUM</p>
-                </a>
+            <div class="menu__nav">
+                    <a href="#index">HOME</a>
+                    <a href="#favorites">FAVS</a>
             </div>
             <!-- <div class="menu__burger"> TODO Menu Burger
                 <ul class="menu__burger-links" id="nav-apartados">
@@ -43,16 +42,18 @@
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 						<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
 					  </svg>
-                </div> -->
-            </div>
+                </div> 
+            </div>-->
         </nav>
     </header>
 
 	<main>
 		<section id="index">
-            <h1>LOREM STORIUM</h1>
-            <h2>Get inspiration for your next story</h2>
-            <p>Are you looking for ideas to deal with that scary white page? Find the perfect idea combination and try to write something with.</p>
+            <section id="index__presentation">
+                <h1>LOREM STORIUM</h1>
+                <h2>Get <mark>inspiration</mark> for your next story</h2>
+                <p>Are you looking for ideas to deal with that scary white page? Find the perfect idea combination and try to write something with.</p>
+            </section>
             <section id="index__options"></section>
             <section id="index__manager"></section>
         </section>
@@ -61,7 +62,9 @@
 	</main>
     
     <footer>
-        <!-- TODO hacer un disclaimer de que las imágenes y los prompts pertenecen a sus autores, que los puedes mirar en tal página -->
+        <section id="disclaimer">
+            <p><strong>Disclaimer</strong>: All the pictures and quotes belong to their authors and they are being used only for inspirational purposes.</p>
+        </section>
         <section id="contact">
             <ul class="contact__rrss">
                 <li class="contact__rrss-icon">
@@ -75,8 +78,8 @@
                     </a>
                 </li>
             </ul>
-            <p class="footer-text">Made by<div id="footer__heart">❤️</div> Dalila Cabrera</p>
-            <p class="footer-text">©2025</p>
+            <p class="contact__text">Made by Dalila Cabrera</p>
+            <p class="contact__text">©2025</p>
         </section>
     </footer>
 </body>

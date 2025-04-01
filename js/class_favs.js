@@ -69,14 +69,12 @@ class FavHTML extends Fav {
         this.updateFavoritesSection();
     }
 
-    updateFavoritesSection() {
+    updateFavoritesSection() { //TODO hacer render para que aparezcan sin tener que actualizar o cambiar de página
         if (!this.favorites) {
             console.error("❌ Error: La sección de favoritos no existe en el HTML");
             return;
         }
-        // Limpiar la sección antes de actualizar
-        this.favorites.innerHTML = "";
-
+        
         // Obtener las ideas favoritas desde localStorage
         const favIdeas = getFromLocalStorage("favorites") || [];
 

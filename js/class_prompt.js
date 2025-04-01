@@ -14,7 +14,7 @@ class PromptHTML extends Prompt {
         this.promptElement = null;
         this.randomButton = null;
     }
-    // INICIALIZAR IMAGEN
+    // INICIALIZAR PROMPT
     initialize() {
         this.createHTML();
         this.setupEventListeners();
@@ -28,12 +28,12 @@ class PromptHTML extends Prompt {
         promptSection.classList.add("index__options-prompt");
         promptSection.innerHTML = "";
 
-        // imagen
+        // prompt
         this.promptElement = document.createElement("p");
-
+        this.promptElement.id="randomPrompt";
         // botón
         this.randomButton = document.createElement("button");
-        this.randomButton.textContent = "Random";
+        this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
 
         // appends
         promptSection.append(this.promptElement, this.randomButton);
