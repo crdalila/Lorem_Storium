@@ -64,7 +64,7 @@ class PromptHTML extends Prompt {
     }
     render() {
         if (this.promptElement) { //por si no hay frase cargada
-            this.promptElement.textContent = this.content;
+            this.promptElement.textContent = `"${this.content}"`;
         }
     }
 }

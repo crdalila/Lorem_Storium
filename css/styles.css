@@ -191,8 +191,16 @@ a {
     color: var(--text-color);
 }
 
-.menu__nav a:hover {
-    color: var(--accent-color);
+button {
+    background-color: var(--accent-color);
+    border-width: 1px;
+    border-color: var(--main-color);
+    border-radius: 0.5em;
+    padding: 0.7em 1.3em;
+}
+
+button i {
+    font-size: 1.5em;
 }
 
 main p, main h1, main h2 {
@@ -203,10 +211,16 @@ main {
     background-color: var(--text-color);
 }
 
+
+/* HEADER */
+
+.menu__nav a:hover {
+    color: var(--accent-color);
+}
 header {
     background-color: var(--main-color);
     width: 100%;
-    border-bottom: 0.02em solid var(--accent-color);
+    border-bottom: 0.2em solid var(--accent-color);
 }
 
 .menu__nav {
@@ -225,7 +239,9 @@ header {
 .menu__nav a:hover {
     scale: 1.3em;
 }
-/*Footer*/
+
+
+/* FOOTER */
 
 footer {
     background-color: var(--main-color);
@@ -267,8 +283,8 @@ footer p {
     font-size: 1.7em;
 }
 
-i:hover {
-    transform: scale(120%);
+button:hover {
+    transform: scale(105%);
     transition: all 150ms ease-in-out;
 }
 
@@ -281,7 +297,11 @@ i:hover {
        PÁGINA: INDEX
       ========================================================================== */
 
-/*INDEX PRESENTATION*/
+/* PRESENTATION */
+
+mark {
+    background-color: var(--accent-color);
+}
 
 #index__presentation {
     margin: 2em;
@@ -291,8 +311,9 @@ i:hover {
     align-items: center;
 }
 
-#index__presentation h1 {
+h1  {
     font-size: 2.5em;
+    text-align: center;
 }
 
 #index__presentation h2 {
@@ -303,17 +324,54 @@ i:hover {
     font-size: 1.2em;
 }
 
-/*TARJETA IMAGEN*/
+/* TARJETAS */
+
 .index__options-image, .index__options-character, .index__options-prompt {
+    display: flex;
+    flex-flow: column;
+    gap: 2em;
     border: 1px solid var(--accent-color);
+    border-radius: 0.2em;
     margin: 2.7em;
     padding: 2em;
 }
 
-button {
-    transform: scale(100%);
+
+/* CHARACTER */
+
+.index__options-character-data h1 {
+    font-size: 1.4em;
+    text-align: center;
 }
+
+.index__options-character-data p {
+    font-size: 1.2em;
+}
+
+/* PROMPT */
+
+.index__options-prompt {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+/* MANAGER */
+
+#index__manager {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    margin: 0em 4em;
+
+}
+
 
 /* ==========================================================================
        PÁGINA: FAVORITOS
       ========================================================================== */
+
+#favorites {
+
+}

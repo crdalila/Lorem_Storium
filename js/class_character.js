@@ -92,9 +92,9 @@ class CharacterHTML extends Character {
             return;
         }
         //actualiza el HTML
-        this.characterName.textContent = `Nombre: ${this.character.name} ${this.character.surname}`;
-        this.characterDob.textContent = `Edad: ${this.character.dob}`;
-        this.characterLocation.textContent = `Localización: ${this.character.location}, ${this.character.country}`;
+        this.characterName.textContent = `${this.character.name} ${this.character.surname}`;
+        this.characterDob.textContent = `Age: ${this.character.dob}`;
+        this.characterLocation.textContent = `Location: ${this.character.location}, ${this.character.country}`;
     }
 }
 

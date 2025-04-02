@@ -12,7 +12,7 @@ function saveToLocalStorage (favs, idea) { //donde se guarda, el qué TODO idea 
 function getFromLocalStorage (favs) {
 	const resultString = localStorage.getItem(favs);
 	const resultJSON = JSON.parse(resultString); //de string a JSON
-	const result = []
+	const result = [];
 	if(resultJSON !== null) {
 		resultJSON.forEach(idea => { //crear un array de ideas
 			result.push(idea);

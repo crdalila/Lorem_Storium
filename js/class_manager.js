@@ -118,5 +118,4 @@ class IdeaManagerHTML extends IdeaManager {
     }
 }
 
-
 export { IdeaManagerHTML };

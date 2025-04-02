@@ -25,7 +25,7 @@ class FavHTML extends Fav {
         super(id);
         this.favCard = null;
         this.favorites = null;
-        this.favButton = null;
+        this.removeButton = null;
     }
 
     // INICIALIZAR
@@ -43,30 +43,27 @@ class FavHTML extends Fav {
         favTitle.textContent = "YOUR FAV IDEAS";
 
         //tarjeta de favoritos
-        const favsLocalStorage = getFromLocalStorage("favorites") || []; //si hay wishlist la carga, si no, array vacío
 
-        this.favCard = document.createElement("section");
+        this.favCard = document.createElement("div");
         this.favCard.setAttribute("id", "favorites__card");
 
-        this.favButton = document.createElement("button");
-        this.favButton.textContent = "Fav";
-        /* 
-                const favImage = document.createElement("img"); //img
-        
-                const favCharacterData = document.createElement("section"); //personaje
-                favCharacterData.classList.add("favorites__card-character");
-                const characterName = document.createElement("h1");
-                const characterLocation = document.createElement("p");
-                const characterDob = document.createElement("p");
-        
-                const favPrompt = document.createElement("p"); //prompt
-                favCharacterData.append(characterName, characterLocation, characterDob);
-         */
-        //appends
-        this.favCard.append(favsLocalStorage);
-        this.favorites.appendChild(favTitle, this.favCard);
+        this.removeButton = document.createElement("button");
+        this.removeButton.textContent = "REMOVE FROM FAVS";
 
-        this.updateFavoritesSection();
+        const favImage = document.createElement("img"); //img
+
+        const favCharacterData = document.createElement("section"); //personaje
+        favCharacterData.classList.add("favorites__card-character");
+        const characterName = document.createElement("h1");
+        const characterLocation = document.createElement("p");
+        const characterDob = document.createElement("p");
+
+        const favPrompt = document.createElement("p"); //prompt
+        
+        //appends
+        favCharacterData.append(characterName, characterLocation, characterDob);
+        this.favCard.append(favImage, favCharacterData, favPrompt, this.removeButton);
+        this.favorites.appendChild(favTitle, this.favCard);
     }
 
     updateFavoritesSection() { //TODO hacer render para que aparezcan sin tener que actualizar o cambiar de página
@@ -74,12 +71,12 @@ class FavHTML extends Fav {
             console.error("❌ Error: La sección de favoritos no existe en el HTML");
             return;
         }
-        
-        // Obtener las ideas favoritas desde localStorage
-        const favIdeas = getFromLocalStorage("favorites") || [];
 
-        favIdeas.forEach(favData => {
-            const favElement = document.createElement("div");
+        // Obtener las ideas favoritas desde localStorage
+        const favLocalStorage = getFromLocalStorage("favorites") || [];
+
+        favLocalStorage.forEach(favData => {
+            const favElement = this.favCard;
             favElement.classList.add("favorite-item");
             favElement.textContent = `Idea: ${this.favCard}`;
 
