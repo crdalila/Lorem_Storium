@@ -34,23 +34,23 @@ class FavHTML extends Fav {
     }
 
     updateFavoritesSection() {
+        //HTML
         this.favorites = document.getElementById("favorites");
         if (!this.favorites) {
             console.error("❌ Error: La sección de favoritos no existe en el HTML");
             return;
         }
-
-        //createHTML
         this.favorites.innerHTML = ''; // Limpiar la sección antes de actualizar
 
         const favTitle = document.createElement('h1');
         favTitle.textContent = "YOUR FAV IDEAS";
         this.favorites.appendChild(favTitle);
 
-        // Obtener los favoritos desde localStorage e invertir el orden
+        //obtener los favoritos desde localStorage e invertir el orden
         const favLocalStorage = getFromLocalStorage("favorites") || [];
         const reversedFavs = favLocalStorage.reverse(); // Último añadido aparecerá primero
-
+        
+        //crear una tarjeta por cada fav
         reversedFavs.forEach(favData => {
             //div favCard
             const favCard = document.createElement("div");

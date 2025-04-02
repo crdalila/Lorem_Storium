@@ -4,8 +4,9 @@ import { PromptHTML } from "./class_prompt.js";
 import { addToLocalStorageArray, getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
 
 class IdeaManager {
-    constructor(id) {
-        this.id = id;
+    static id = 0;
+    constructor() {
+        this.id = ++IdeaManager.id;
         this.fav = false;
     }
 
@@ -28,6 +29,7 @@ class IdeaManagerHTML extends IdeaManager {
         this.imageInstance = imageInstance; //para que no nos genere un html nuevo sino que lo coja de la imagen que ya tenemos
         this.characterInstance = characterInstance;
         this.promptInstance = promptInstance;
+
     }
 
     // INICIALIZAR
