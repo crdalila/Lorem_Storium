@@ -6,8 +6,9 @@ import { getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage
 
 
 class Fav {
-    constructor(id) {
-        this.id = id;
+    static id = 0;
+    constructor() {
+        this.id = ++Fav.id;
         this.fav = false;
     }
     // FUNCIÓN GUARDAR FAVORITOS
@@ -49,12 +50,15 @@ class FavHTML extends Fav {
         //obtener los favoritos desde localStorage e invertir el orden
         const favLocalStorage = getFromLocalStorage("favorites") || [];
         const reversedFavs = favLocalStorage.reverse(); // Último añadido aparecerá primero
-        
+
         //crear una tarjeta por cada fav
         reversedFavs.forEach(favData => {
             //div favCard
             const favCard = document.createElement("div");
             favCard.classList.add("favorites__card");
+
+            const favIdea = document.createElement("div");
+            favIdea.classList.add("favorites__idea");
 
             //image
             const favImage = document.createElement("img");
@@ -65,14 +69,14 @@ class FavHTML extends Fav {
             const favCharacterData = document.createElement("section");
             favCharacterData.classList.add("favorites__card-character");
 
-            const characterName = document.createElement("h1");
-            characterName.textContent = `Name: ${favData.charInfo.name}`;
+            const characterName = document.createElement("h2");
+            characterName.textContent = `${favData.charInfo.name}`;
 
             const characterAge = document.createElement("p");
-            characterAge.textContent = `Age: ${favData.charInfo.age}`;
+            characterAge.textContent = `${favData.charInfo.age}`;
 
             const characterLocation = document.createElement("p");
-            characterLocation.textContent = `Location: ${favData.charInfo.location}`;
+            characterLocation.textContent = `${favData.charInfo.location}`;
 
             favCharacterData.append(characterName, characterAge, characterLocation);
 
@@ -81,34 +85,22 @@ class FavHTML extends Fav {
             favPrompt.textContent = `Prompt: ${favData.prompt}`;
 
             // Botón para eliminar de favoritos
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remove from favorites";
-            removeButton.addEventListener("click", () => {
-                removeFromLocalStorageArray("favorites", favData);
-                this.updateFavoritesSection();
-            });
-
-            // Ensamblar la tarjeta
-            favCard.append(favImage, favCharacterData, favPrompt, removeButton);
-            this.favorites.appendChild(favCard); // Agregar cada tarjeta a la sección
-        });
-        return reversedFavs;
-    }
-
-    // EVENT LISTENERS: BOTÓN BORRAR FAVORITOS
-    setupEventListenerFav() {
-        if (!this.favCard) {
-            return;
-        }
-        if (this.favButton) {
-            this.favButton.addEventListener("click", () => {
-                removeFromLocalStorageArray("favorites", idea);
-                this.updateFavoritesSection(); // Actualizar la UI después de eliminar
-            });
-        } else {
-            console.error("❌ Error: FavButton no existe");
-        }
-    }
+            this.removeButton = document.createElement("button");
+            this.removeButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+            if (this.removeButton) {
+                this.removeButton.addEventListener("click", () => {
+                    removeFromLocalStorageArray("favorites", favData);
+                    this.updateFavoritesSection(); // Actualizar la UI después de eliminar
+                });
+            } else {
+                console.error("❌ Error: RemoveButton does not exist");
+            }
+        //append
+        favIdea.append(favImage, favCharacterData, favPrompt);
+        favCard.append(this.removeButton, favIdea);
+        this.favorites.appendChild(favCard); // Agregar cada tarjeta a la sección
+        });  
+    };
 }
 
 export { FavHTML }

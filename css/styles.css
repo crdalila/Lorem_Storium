@@ -203,7 +203,9 @@ button i {
     font-size: 1.5em;
 }
 
-main p, main h1, main h2 {
+main p,
+main h1,
+main h2 {
     color: var(--main-color);
 }
 
@@ -217,6 +219,7 @@ main {
 .menu__nav a:hover {
     color: var(--accent-color);
 }
+
 header {
     background-color: var(--main-color);
     width: 100%;
@@ -311,7 +314,7 @@ mark {
     align-items: center;
 }
 
-h1  {
+h1 {
     font-size: 2.5em;
     text-align: center;
 }
@@ -326,7 +329,9 @@ h1  {
 
 /* TARJETAS */
 
-.index__options-image, .index__options-character, .index__options-prompt {
+.index__options-image,
+.index__options-character,
+.index__options-prompt {
     display: flex;
     flex-flow: column;
     gap: 2em;
@@ -367,11 +372,89 @@ h1  {
 
 }
 
+/* ====
+       MEDIA: INDEX FOR COMPUTER */
+
+@media (min-width: 768px) {
+    #index__options {
+        display: flex;
+        align-items: stretch;
+        margin: 0em 2.5em 4em 2.5em;
+        gap: 2em;
+    }
+
+    .index__options-image {
+        max-width: 40%;
+    }
+
+    .index__options-image,
+    .index__options-character,
+    .index__options-prompt {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        gap: 2em;
+        border: 1px solid var(--accent-color);
+        border-radius: 0.2em;
+        margin: 0.5em;
+        padding: 1em;
+    }
+
+    .index__options-character {
+        gap: 10em;
+        min-width: max-content;
+    }
+
+    .index__options-character-data {
+        display: flex;
+        flex-flow: column;
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+
+    .index__options-prompt {
+        gap: 10em;
+    }
+
+}
+
 
 /* ==========================================================================
        PÁGINA: FAVORITOS
       ========================================================================== */
 
 #favorites {
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.favorites__idea {
+    display: flex;
+    flex-flow: column;
+    font-size: 1.2em;
+    gap: 1.2em;
+}
+
+.favorites__card {
+    border: 0.1em solid #e4c24b;
+    margin: 0em 2em;
+    padding: 1em;
+}
+
+.favorites__card button {
+    position:absolute;
+}
+
+.favorites__card-character h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* ====
+       MEDIA: FAVORITES FOR COMPUTER */
+
+@media (min-width: 768px) {
 
 }

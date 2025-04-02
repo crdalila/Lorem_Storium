@@ -49,7 +49,7 @@ class IdeaManagerHTML extends IdeaManager {
         this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
 
         this.favButton = document.createElement("button");
-        this.favButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+        this.favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
         this.favButton.id = "favButton";
 
         //appends
@@ -77,14 +77,14 @@ class IdeaManagerHTML extends IdeaManager {
     setupEventListenerFav() {
         if (this.favButton) {
             this.favButton.addEventListener("click", () => {
+                this.favButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
                 const cardData = this.grabRandomInfo();
                 const favIdeas = getFromLocalStorage("favorites") || [];
-                const isFavIdea = favIdeas.some(fav => fav.id === this.id);
+                const isFavIdea = favIdeas.some(fav => fav.id === this.id); //esto no funciona yo creo
                 if (isFavIdea) {
                     this.removeFav();
                     removeFromLocalStorageArray("favorites", this);
                 } else {
-                    this.saveFav();
                     addToLocalStorageArray("favorites", cardData);
                 }
             });

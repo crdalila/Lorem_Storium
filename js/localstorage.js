@@ -32,18 +32,20 @@ function addToLocalStorageArray (favs, idea) {
 }
 
 // Eliminar libros del array guardado en LocalStorage
-function removeFromLocalStorageArray (favs, idea) {
-	const array = getFromLocalStorage(favs);
-	if (!array) {
-		return;
-	}
-	const index = array.findIndex(element => element.id === idea.id);
-	if (index === -1) {
-		return;
-	}
-	array.splice(index, 1);
-	saveToLocalStorage(favs, array);
+function removeFromLocalStorageArray(favs, idea) {
+    let array = getFromLocalStorage(favs);
+    if (!array || array.length === 0) {
+        return;
+    }
+    //buscar el índice del favorito basado en la imagen
+    const index = array.findIndex(element => element.imgsrc === idea.imgsrc);
+    if (index === -1) {
+        return; //si no se encuentra, no hacemos nada
+    }
+    array.splice(index, 1);
+    localStorage.setItem(favs, JSON.stringify(array));
 }
+
 
 export {
 	saveToLocalStorage,
