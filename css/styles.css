@@ -213,6 +213,18 @@ main {
     background-color: var(--text-color);
 }
 
+.hidden {
+    display: none;
+}
+
+#index.hidden {
+    display: none;
+}
+
+#favorites.hidden {
+    display: none;
+}
+
 
 /* HEADER */
 
@@ -383,10 +395,6 @@ h1 {
         gap: 2em;
     }
 
-    .index__options-image {
-        max-width: 40%;
-    }
-
     .index__options-image,
     .index__options-character,
     .index__options-prompt {
@@ -398,10 +406,12 @@ h1 {
         border-radius: 0.2em;
         margin: 0.5em;
         padding: 1em;
+        max-width: 500px;
+        max-height: 500px;
     }
 
     .index__options-character {
-        gap: 10em;
+        gap: 9em;
         min-width: max-content;
     }
 
@@ -413,7 +423,9 @@ h1 {
     }
 
     .index__options-prompt {
-        gap: 10em;
+        gap: 4em;
+        display: flex;
+        align-content: center;
     }
 
 }

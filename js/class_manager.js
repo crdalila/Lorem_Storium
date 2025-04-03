@@ -67,9 +67,10 @@ class IdeaManagerHTML extends IdeaManager {
                 this.imageInstance.loadRandomImage();
                 this.characterInstance.loadRandomCharacter();
                 this.promptInstance.loadRandomPrompt();
+                this.favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
             });
         } else {
-            console.error("❌ Error: RandomButton no existe");
+            console.error("❌ Error: RandomButton does not exist");
         }
     }
 
@@ -80,8 +81,8 @@ class IdeaManagerHTML extends IdeaManager {
                 this.favButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
                 const cardData = this.grabRandomInfo();
                 const favIdeas = getFromLocalStorage("favorites") || [];
-                const isFavIdea = favIdeas.some(fav => fav.id === this.id); //esto no funciona yo creo
-                if (isFavIdea) {
+                const isFavIdea = favIdeas.some(fav => fav.id === this.id); //TODO no lo entiendo esto no funciona yo creo
+                if (isFavIdea) { //TODO qué hace esto??????????????
                     this.removeFav();
                     removeFromLocalStorageArray("favorites", this);
                 } else {

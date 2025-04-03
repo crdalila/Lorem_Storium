@@ -1,7 +1,3 @@
-import { ImageHTML } from "./class_image.js";
-import { CharacterHTML } from "./class_character.js";
-import { fetchPrompt } from "./api.js";
-import { IdeaManagerHTML } from "./class_manager.js";
 import { getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
 
 
@@ -38,7 +34,7 @@ class FavHTML extends Fav {
         //HTML
         this.favorites = document.getElementById("favorites");
         if (!this.favorites) {
-            console.error("❌ Error: La sección de favoritos no existe en el HTML");
+            console.error("❌ Error: Fav section does not exist in the HTML");
             return;
         }
         this.favorites.innerHTML = ''; // Limpiar la sección antes de actualizar
@@ -70,13 +66,13 @@ class FavHTML extends Fav {
             favCharacterData.classList.add("favorites__card-character");
 
             const characterName = document.createElement("h2");
-            characterName.textContent = `${favData.charInfo.name}`;
+            characterName.textContent = favData.charInfo.name ? favData.charInfo.name : "Unknown Name"; //si no hay datos, genera este texto alternativo
 
             const characterAge = document.createElement("p");
-            characterAge.textContent = `${favData.charInfo.age}`;
+            characterAge.textContent = favData.charInfo.age ? favData.charInfo.age : "Unknown Age";
 
             const characterLocation = document.createElement("p");
-            characterLocation.textContent = `${favData.charInfo.location}`;
+            characterLocation.textContent = favData.charInfo.location ? favData.charInfo.location : "Unknown Location";
 
             favCharacterData.append(characterName, characterAge, characterLocation);
 
@@ -90,16 +86,16 @@ class FavHTML extends Fav {
             if (this.removeButton) {
                 this.removeButton.addEventListener("click", () => {
                     removeFromLocalStorageArray("favorites", favData);
-                    this.updateFavoritesSection(); // Actualizar la UI después de eliminar
+                    this.updateFavoritesSection();
                 });
             } else {
                 console.error("❌ Error: RemoveButton does not exist");
             }
-        //append
-        favIdea.append(favImage, favCharacterData, favPrompt);
-        favCard.append(this.removeButton, favIdea);
-        this.favorites.appendChild(favCard); // Agregar cada tarjeta a la sección
-        });  
+            //append
+            favIdea.append(favImage, favCharacterData, favPrompt);
+            favCard.append(this.removeButton, favIdea);
+            this.favorites.appendChild(favCard); // Agregar cada tarjeta a la sección
+        });
     };
 }
 

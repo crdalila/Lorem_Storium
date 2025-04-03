@@ -82,7 +82,7 @@ class CharacterHTML extends Character {
                 this.render();
             }
         } catch (error) {
-            console.error("❌ Error al cargar los datos del personaje", error);
+            console.error("❌ Error. You cant load random characters", error);
         }
     }
 

@@ -17,37 +17,17 @@
 </head>
 
 <body>
-
     <header>
         <nav id="menu">
             <div class="menu__nav">
-                    <a href="#index">HOME</a>
-                    <a href="#favorites">FAVS</a>
+                    <a href="#index" id="home_link">HOME</a>
+                    <a href="#favorites" id="favs_link">FAVS</a>
             </div>
-            <!-- <div class="menu__burger"> TODO Menu Burger
-                <ul class="menu__burger-links" id="nav-apartados">
-                    <li class="menu__burger-link">
-						<a href="#browser" id="browser_menu">BUSQUEDA AVANZADA</a>
-					</li>
-                    <li class="menu__burger-link">
-						<a href="#wishlist" id="wishlist_menu">WISHLIST</a>
-					</li>
-                    <li class="menu__burger-link">
-						<a href="#contact" id="contact_menu">CONTACTO</a>
-					</li>
-                </ul>
-
-                <div class="menu__burger-icon" id="burger_icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-						<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-					  </svg>
-                </div> 
-            </div>-->
         </nav>
     </header>
 
 	<main>
-		<section id="index">
+		<section id="index" class="content">
             <section id="index__presentation">
                 <h1>LOREM STORIUM</h1>
                 <h2>Get <mark>inspiration</mark> for your next story</h2>
@@ -56,7 +36,9 @@
             <section id="index__options"></section>
             <section id="index__manager"></section>
         </section>
-        <section id="favorites"></section>
+
+        <section id="favorites" class="content hidden">
+        </section>
         
 	</main>
     

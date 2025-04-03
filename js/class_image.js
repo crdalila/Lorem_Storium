@@ -32,7 +32,7 @@ class ImageHTML extends Image {
 
         // imagen
         this.imageElement = document.createElement("img");
-        this.imageElement.setAttribute("alt", "Imagen random de la página Picsum");
+        this.imageElement.setAttribute("alt", "Random image from Picsum");
         this.imageElement.setAttribute("id", "randomImage");
 
         // botón
@@ -61,7 +61,7 @@ class ImageHTML extends Image {
                 this.render();
             }
         } catch (error) {
-            console.error("❌ Error al cargar imagen:", error);
+            console.error("❌ Error loading the image", error);
         }
     }
     // RENDERIZAR IMAGEN

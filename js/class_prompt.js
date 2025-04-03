@@ -59,7 +59,7 @@ class PromptHTML extends Prompt {
                 this.render();
             }
         } catch (error) {
-            console.error("❌ Error al cargar la frase inspiradora", error);
+            console.error("❌ Error loading inspirational quote", error);
         }
     }
     render() {
@@ -68,6 +68,5 @@ class PromptHTML extends Prompt {
         }
     }
 }
-
 
 export { PromptHTML }

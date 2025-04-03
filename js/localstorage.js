@@ -6,7 +6,6 @@ import { IdeaManagerHTML } from "./class_manager.js"
 function saveToLocalStorage (favs, idea) { //donde se guarda, el qué TODO idea es un array de ideas
 	const stringIdea = JSON.stringify(idea); //de JSON a string
 	localStorage.setItem(favs, stringIdea);
-	console.log("Guardando en favoritos **");
 }
 
 // Recuperar todos los objetos guardados en el LocalStorage
@@ -19,7 +18,6 @@ function getFromLocalStorage (favs) {
 			result.push(idea);
 		});	
 	}
-	console.log("Lo que está en localstorage **", result);
 	return result;
 }
 
