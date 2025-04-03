@@ -1,4 +1,3 @@
-// TODO main.js
 import { ImageHTML } from './class_image.js';
 import { CharacterHTML } from './class_character.js';
 import { IdeaManagerHTML } from './class_manager.js';
@@ -30,13 +29,18 @@ const ideaManager = new IdeaManagerHTML("FAVS", imageInstance, characterInstance
 ideaManager.initialize();
 
 
+
 // MOSTRAR O NO EL CONTENIDO DE LA PÁGINA (por link HOME o link FAV)
+
+//home
 const home_link = document.getElementById("home_link");
 home_link.addEventListener("click", (e) => {
 	showSection('index');
 });
 
+//favorites
 const fav_link = document.getElementById("favs_link");
 fav_link.addEventListener("click", (e) => {
 	showSection('favorites');
+	favsInstance.updateFavoritesSection(); //para actualizar la sección de favs sin tener que actualizar la página
 });

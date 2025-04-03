@@ -1,6 +1,3 @@
-import { ImageHTML } from "./class_image.js";
-import { CharacterHTML } from "./class_character.js";
-import { PromptHTML } from "./class_prompt.js";
 import { addToLocalStorageArray, getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
 
 class IdeaManager {

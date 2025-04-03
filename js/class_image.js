@@ -1,4 +1,5 @@
 import { fetchImages } from "./api.js";
+import { FavHTML } from "./class_favs.js";
 
 class Image {
     constructor(id, imageLink, moreInfo) {
@@ -44,14 +45,20 @@ class ImageHTML extends Image {
         index__options.append(imageSection);
         index.append(index__options);
     }
+
     // EVENT LISTENERS
     setupEventListeners() {
         this.loadRandomImage();
 
         if (this.randomButton) {
-            this.randomButton.addEventListener('click', () => this.loadRandomImage());
+            this.randomButton.addEventListener('click', () => {
+                this.loadRandomImage();
+                const favButton = document.getElementById('favButton');
+                favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+            });
         }
     }
+
     // CARGAR IMAGEN ALEATORIA
     async loadRandomImage() {
         try {
@@ -64,6 +71,7 @@ class ImageHTML extends Image {
             console.error("❌ Error loading the image", error);
         }
     }
+
     // RENDERIZAR IMAGEN
     render() {
         if (this.imageElement) { //comprueba si lo has creado en createHTML

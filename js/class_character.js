@@ -22,7 +22,7 @@ class Character {
 
 class CharacterHTML extends Character {
     constructor(id, name, surname, location, country, dob) {
-        super (id, name, surname, location, country, dob);
+        super(id, name, surname, location, country, dob);
         this.character = null; // el personaje está vacío al principio
         this.randomButton = null;
         this.characterSection = null; //los necesitamos aquí y no como variable dentro de createHTML porque lo vamos a necesitar fuera también
@@ -44,7 +44,7 @@ class CharacterHTML extends Character {
         // sección datos + botón
         this.characterSection = document.createElement("section");
         this.characterSection.classList.add("index__options-character");
-        
+
         // datos
         const characterData = document.createElement("section");
         characterData.classList.add("index__options-character-data");
@@ -52,11 +52,11 @@ class CharacterHTML extends Character {
         this.characterName = document.createElement("h1");
         this.characterLocation = document.createElement("p");
         this.characterDob = document.createElement("p");
-        
+
         //botón
         this.randomButton = document.createElement("button");
         this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
-        
+
         //appends
         characterData.append(this.characterName, this.characterDob, this.characterLocation);
         this.characterSection.append(characterData, this.randomButton);
@@ -69,7 +69,11 @@ class CharacterHTML extends Character {
         this.loadRandomCharacter(); //nos carga un personaje nuevo
 
         if (this.randomButton) { //si el botón está bien creado
-            this.randomButton.addEventListener("click", () => this.loadRandomCharacter());
+            this.randomButton.addEventListener("click", () => {
+                this.loadRandomCharacter();
+                const favButton = document.getElementById('favButton');
+                favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+            });
         }
     }
 

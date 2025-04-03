@@ -381,6 +381,7 @@ h1 {
     justify-content: center;
     gap: 2em;
     margin: 0em 4em;
+    margin-bottom: 2em;
 
 }
 
@@ -469,4 +470,23 @@ h1 {
 
 @media (min-width: 768px) {
 
+    .favorites__card {
+        max-width: 700px;
+        margin-bottom: 2em;
+    }
+    .favorites__idea {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        font-size: 1.2em;
+        gap: 1.2em;
+        padding-inline: 2em;
+    }
+
+    .favorites__idea img {
+        max-width: 600px;
+        max-height: 500px;
+    }
+    
+    .favorites__
 }

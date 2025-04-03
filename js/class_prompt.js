@@ -30,7 +30,7 @@ class PromptHTML extends Prompt {
 
         // prompt
         this.promptElement = document.createElement("p");
-        this.promptElement.id="randomPrompt";
+        this.promptElement.id = "randomPrompt";
         // botón
         this.randomButton = document.createElement("button");
         this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
@@ -45,12 +45,16 @@ class PromptHTML extends Prompt {
         this.loadRandomPrompt();
 
         if (this.randomButton) {
-            this.randomButton.addEventListener('click', () => this.loadRandomPrompt());
+            this.randomButton.addEventListener('click', () => {
+                this.loadRandomPrompt();
+                const favButton = document.getElementById('favButton');
+                favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+            });
         }
     }
     // CARGAR FRASE ALEATORIA
     async loadRandomPrompt() {
-        
+
         try {
             const promptArray = await fetchPrompt(); //por cómo nos da los datos la API, todos los datos están en el [0]
             if (promptArray && promptArray.length > 0) { //si el array de datos existe (mayor que 0 elementos)
