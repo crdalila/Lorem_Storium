@@ -211,6 +211,7 @@ main h2 {
 
 main {
     background-color: var(--text-color);
+    min-height: 90vh;
 }
 
 .hidden {
@@ -304,10 +305,6 @@ button:hover {
 }
 
 
-@media (min-width: 768px) {
-    /*Para ordenador*/
-}
-
 /* ==========================================================================
        PÁGINA: INDEX
       ========================================================================== */
@@ -353,6 +350,11 @@ h1 {
     padding: 2em;
 }
 
+/* IMAGE */
+
+.index__options-image {
+    overflow: hidden;
+}
 
 /* CHARACTER */
 
@@ -381,14 +383,54 @@ h1 {
     justify-content: center;
     gap: 2em;
     margin: 0em 4em;
-    margin-bottom: 2em;
-
 }
 
-/* ====
-       MEDIA: INDEX FOR COMPUTER */
+
+
+/* ==========================================================================
+       PÁGINA: FAVORITOS
+      ========================================================================== */
+
+#favorites {
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.favorites__idea {
+    display: flex;
+    flex-flow: column;
+    font-size: 1.2em;
+    gap: 1.2em;
+}
+
+.favorites__card {
+    border: 0.1em solid #e4c24b;
+    margin: 0em 2em;
+    padding: 1em;
+}
+
+.favorites__card button {
+    position: absolute;
+}
+
+.favorites__card-character h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+/* ==========================================================================
+       MEDIA: FOR COMPUTER
+      ========================================================================== */
+
 
 @media (min-width: 768px) {
+
+    /* INDEX */
+
     #index__options {
         display: flex;
         align-items: stretch;
@@ -424,56 +466,18 @@ h1 {
     }
 
     .index__options-prompt {
-        gap: 4em;
+        gap: 5em;
         display: flex;
         align-content: center;
     }
 
-}
-
-
-/* ==========================================================================
-       PÁGINA: FAVORITOS
-      ========================================================================== */
-
-#favorites {
-    display: flex;
-    flex-flow: column;
-    gap: 1em;
-    margin-bottom: 2em;
-}
-
-.favorites__idea {
-    display: flex;
-    flex-flow: column;
-    font-size: 1.2em;
-    gap: 1.2em;
-}
-
-.favorites__card {
-    border: 0.1em solid #e4c24b;
-    margin: 0em 2em;
-    padding: 1em;
-}
-
-.favorites__card button {
-    position:absolute;
-}
-
-.favorites__card-character h2 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* ====
-       MEDIA: FAVORITES FOR COMPUTER */
-
-@media (min-width: 768px) {
+    /* FAVORITES */
 
     .favorites__card {
         max-width: 700px;
         margin-bottom: 2em;
     }
+
     .favorites__idea {
         display: flex;
         flex-flow: column;
@@ -487,6 +491,4 @@ h1 {
         max-width: 600px;
         max-height: 500px;
     }
-    
-    .favorites__
 }
