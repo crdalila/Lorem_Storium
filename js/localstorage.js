@@ -3,7 +3,7 @@ import { CharacterHTML } from "./class_character.js";
 import { IdeaManagerHTML } from "./class_manager.js"
 
 // Guardar objetos en LocalStorage
-function saveToLocalStorage (favs, idea) { //donde se guarda, el qué TODO idea es un array de ideas
+function saveToLocalStorage (favs, idea) { //donde se guarda, el qué
 	const stringIdea = JSON.stringify(idea); //de JSON a string
 	localStorage.setItem(favs, stringIdea);
 }

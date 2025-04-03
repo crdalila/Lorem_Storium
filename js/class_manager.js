@@ -1,18 +1,9 @@
-import { addToLocalStorageArray, getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
+import { getFromLocalStorage, removeFromLocalStorageArray } from "./localstorage.js";
 
 class IdeaManager {
     static id = 0;
     constructor() {
         this.id = ++IdeaManager.id;
-        this.fav = false;
-    }
-
-    // FUNCIÓN GUARDAR FAVORITOS
-    saveFav() {
-        this.fav = true;
-    }
-    // FUNCIÓN BORRAR FAVORITOS
-    removeFav() {
         this.fav = false;
     }
 }
@@ -23,28 +14,27 @@ class IdeaManagerHTML extends IdeaManager {
         this.randomButton = null;
         this.favButton = null;
         this.idea = null;
-        this.imageInstance = imageInstance; //para que no nos genere un html nuevo sino que lo coja de la imagen que ya tenemos
+        this.imageInstance = imageInstance;
         this.characterInstance = characterInstance;
         this.promptInstance = promptInstance;
-
     }
 
-    // INICIALIZAR
     initialize() {
         this.createHTML();
         this.setupEventListenerRandom();
         this.setupEventListenerFav();
     }
 
-    // CREAR HTML DEL INDEX MANAGER
     createHTML() {
+        //index
         const index = document.getElementById("index");
-        const index__manager = document.getElementById("index__manager")
+        const index__manager = document.getElementById("index__manager");
 
-        //botones
+        //botón random
         this.randomButton = document.createElement("button");
         this.randomButton.innerHTML = `<i class="fa-solid fa-shuffle"></i>`;
 
+        //botón fav
         this.favButton = document.createElement("button");
         this.favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
         this.favButton.id = "favButton";
@@ -54,7 +44,7 @@ class IdeaManagerHTML extends IdeaManager {
         index.append(index__manager);
     }
 
-    // BOTÓN RANDOM PARA LOS TRES ELEMENTOS: IMG, PERSONAJE Y PROMPT 
+    //FUNCIONALIDAD DEL BOTÓN RANDOM
     setupEventListenerRandom() {
         if (!this.imageInstance || !this.characterInstance || !this.promptInstance) {
             return;
@@ -71,50 +61,62 @@ class IdeaManagerHTML extends IdeaManager {
         }
     }
 
-    // BOTÓN FAVORITOS CREA UN OBJETO CON LA INFO DE ESTA COMBINACIÓN Y LA METE EN LOCALSTORAGE
+    //FUNCIONALIDAD DEL BOTÓN FAVORITOS
     setupEventListenerFav() {
         if (this.favButton) {
             this.favButton.addEventListener("click", () => {
-                this.favButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
                 const cardData = this.grabRandomInfo();
-                const favIdeas = getFromLocalStorage("favorites") || [];
-                const isFavIdea = favIdeas.some(fav => fav.id === this.id); //TODO no lo entiendo esto no funciona yo creo
-                if (isFavIdea) { //TODO qué hace esto??????????????
-                    this.removeFav();
-                    removeFromLocalStorageArray("favorites", this);
-                } else {
-                    addToLocalStorageArray("favorites", cardData);
+                let favIdeas = getFromLocalStorage("favorites") || [];
+
+                //comparar datos para ver si están duplicados
+                const exists = favIdeas.some(fav =>
+                    fav.imgsrc === cardData.imgsrc &&
+                    fav.charInfo.name === cardData.charInfo.name &&
+                    fav.charInfo.age === cardData.charInfo.age &&
+                    fav.charInfo.location === cardData.charInfo.location &&
+                    fav.prompt === cardData.prompt
+                );
+                if (!exists) { //si no existe, guárdalo
+                    favIdeas.push(cardData);
+                    localStorage.setItem("favorites", JSON.stringify(favIdeas));
+                    this.favButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+                } else { //si existe, elimínalo
+                    this.favButton.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+                    removeFromLocalStorageArray("favorites", cardData);
                 }
             });
         }
     }
 
-    // COGER LA INFORMACIÓN QUE QUEREMOS GUARDAR EN FAVORITOS
     grabRandomInfo() {
-        // image
-        const imgSrc = document.querySelector('#randomImage').src; //coge el src del id randomImage
+        //image
+        const imgSrc = document.querySelector('#randomImage').src;
 
-        // character
+        //character
         const charSection = document.querySelector('.index__options-character-data');
-        const charName = charSection.querySelector('h1').textContent; //coge el textContent del h1 DENTRO de charSection
+        const charName = charSection.querySelector('h1').textContent;
         const charAge = charSection.querySelector('p').textContent;
-        const charLocation = charSection.querySelector('p+p').textContent; //coge el SEGUNDO p de charInfo
-        const charInfo = { //guardamos la info del personaje en un objeto
+        const charLocation = charSection.querySelector('p+p').textContent;
+        const charInfo = { //objeto con la info del character
             name: charName,
             age: charAge,
             location: charLocation,
-        }
+        };
 
         //prompt
         const randomPrompt = document.querySelector('#randomPrompt').textContent;
 
-        //datos guardados en objeto
-        const favCardData = {
+        //generar un fav_id: el uniqueString es un string con los datos básicos
+        const uniqueString = `${imgSrc}${charName}${randomPrompt}`;
+        //encodeURIComponent convierte el string en seguro sin tildes ni ñ
+        const fav_id = (encodeURIComponent(uniqueString));
+
+        return {
+            fav_id: fav_id,
             imgsrc: imgSrc,
-            charInfo: charInfo, //esto es un objeto
+            charInfo: charInfo,
             prompt: randomPrompt,
-        }
-        return favCardData
+        };
     }
 }
 
