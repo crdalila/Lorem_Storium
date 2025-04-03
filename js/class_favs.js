@@ -30,6 +30,7 @@ class FavHTML extends Fav {
         this.updateFavoritesSection();
     }
 
+    // ACTUALIZAR LA PÁGINA DE FAVORITOS PARA PONERLA AL DÍA
     updateFavoritesSection() {
         //HTML
         this.favorites = document.getElementById("favorites");
@@ -37,7 +38,7 @@ class FavHTML extends Fav {
             console.error("❌ Error: Fav section does not exist in the HTML");
             return;
         }
-        this.favorites.innerHTML = ''; // Limpiar la sección antes de actualizar
+        this.favorites.innerHTML = ''; //limpiar la sección antes de actualizar
 
         const favTitle = document.createElement('h1');
         favTitle.textContent = "YOUR FAV IDEAS";
@@ -45,7 +46,7 @@ class FavHTML extends Fav {
 
         //obtener los favoritos desde localStorage e invertir el orden
         const favLocalStorage = getFromLocalStorage("favorites") || [];
-        const reversedFavs = favLocalStorage.reverse(); // Último añadido aparecerá primero
+        const reversedFavs = favLocalStorage.reverse(); //el último añadido aparecerá primero
 
         //crear una tarjeta por cada fav
         reversedFavs.forEach(favData => {
@@ -80,7 +81,7 @@ class FavHTML extends Fav {
             const favPrompt = document.createElement("p");
             favPrompt.textContent = `Prompt: ${favData.prompt}`;
 
-            // Botón para eliminar de favoritos
+            //botón eliminar de favoritos
             this.removeButton = document.createElement("button");
             this.removeButton.innerHTML = `<i class="fa-solid fa-heart"></i>`;
             if (this.removeButton) {
@@ -94,7 +95,7 @@ class FavHTML extends Fav {
             //append
             favIdea.append(favImage, favCharacterData, favPrompt);
             favCard.append(this.removeButton, favIdea);
-            this.favorites.appendChild(favCard); // Agregar cada tarjeta a la sección
+            this.favorites.appendChild(favCard);
         });
     };
 }

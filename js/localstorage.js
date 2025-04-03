@@ -29,7 +29,7 @@ function addToLocalStorageArray (favs, idea) {
 	saveToLocalStorage(favs, array);
 }
 
-// Eliminar libros del array guardado en LocalStorage
+//eliminar libros del LocalStorage
 function removeFromLocalStorageArray(favs, idea) {
     let array = getFromLocalStorage(favs);
     if (!array || array.length === 0) {
